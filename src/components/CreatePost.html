@@ -1,0 +1,61 @@
+<div class="grid md:grid-cols-3 md:container container mx-auto my-10">
+    <div class="col-span-2 border w-full">
+        <h2 class="text-3xl my-3" v-if="existsEdit">Edita un post</h2>
+        <h2 class="text-3xl my-3" v-else>Crea un post</h2>
+
+        <form class="md:w-2/3 md:mx-auto w-full p-2" v-on:submit.prevent="onSubmit">
+            
+            <input type="text" placeholder="Titulo" name="title" class="w-full p-2 rounded border outline-none"
+                v-model="article.title" required />
+            <div v-if="submitted && !$v.article.title.required" class="
+            text-white
+            font-bold
+            text-center
+            px-5
+            py-2
+            bg-red-600
+            rounded-xl
+          ">
+                El titulo debe tene algo!!
+            </div>
+
+            <textarea placeholder="Contenido ..." name="content"
+                class="w-full p-2 rounded mt-7 h-44 border outline-none" v-model="article.content" required></textarea>
+            <div v-if="submitted && !$v.article.content.required" class="
+            text-white
+            font-bold
+            text-center
+            px-5
+            py-2
+            bg-red-600
+            rounded-xl
+          ">
+                El contenido debe tener algo!!
+            </div>
+
+            <label for="image" class="text-left block mt-7 mb-2">Añade una imagen</label>
+
+            <img :src="globally+'/api/getImage/'+article.image" alt="imagen" v-if="article.image " class="object-cover w-56 h-56 my-5">
+
+
+            <input type="file" class="w-full mb-5" name="file0" ref="file" v-on:change="fileChange" />
+
+            <button class="
+            px-5
+            py-3
+            bg-green-500
+            text-white
+            font-bold
+            mb-10
+            transform
+            hover:scale-105
+            transition-all
+            cursor-pointer
+            rounded-lg
+          ">
+                Guardar
+            </button>
+        </form>
+    </div>
+    <AsideBar></AsideBar>
+</div>
